@@ -23,10 +23,18 @@ export default defineConfig([
     }
   },
 
-  // React config (already present)
-  pluginReact.configs.flat.recommended,
+  // ✅ React config (now wrapped properly)
+  {
+    files: ["**/*.{jsx,js}"],
+    ...pluginReact.configs.flat.recommended,
+    settings: {
+      react: {
+        version: "detect"
+      }
+    }
+  },
 
-  // Mocha test support (for test.js)
+  // ✅ Mocha test support (test.js)
   {
     files: ["tests/**/*.js"],
     languageOptions: {

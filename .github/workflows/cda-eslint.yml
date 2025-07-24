@@ -26,7 +26,12 @@ jobs:
         run: npm install @microsoft/eslint-formatter-sarif --save-dev
 
       - name: Run ESLint with SARIF output
-        run: npx eslint . --format=@microsoft/eslint-formatter-sarif --output-file=reports/eslint-results.sarif || true
+        run: |
+          npx eslint . \
+            --ext .js,.mjs,.cjs,.jsx \
+            --format=@microsoft/eslint-formatter-sarif \
+            --output-file=reports/eslint-results.sarif || true
+
 
       - name: Debug ESLint Output
         run: cat reports/eslint-results.sarif || echo "No SARIF report generated"
