@@ -14,24 +14,14 @@ export default defineConfig([
         ...globals.browser
       }
     },
-    plugins: {
-      js
-    },
-    rules: {
-      ...js.configs.recommended.rules
-    }
+    plugins: { js },
+    rules: { ...js.configs.recommended.rules }
   },
-
-  // React-specific config
   pluginReact.configs.flat.recommended,
-
-  // Mocha test file support
   {
     files: ["tests/**/*.js"],
     languageOptions: {
-      globals: {
-        ...globals.mocha
-      }
+      globals: { ...globals.mocha }
     }
   }
 ]);
