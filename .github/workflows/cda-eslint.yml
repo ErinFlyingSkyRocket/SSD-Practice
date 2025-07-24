@@ -32,9 +32,8 @@ jobs:
             --format=@microsoft/eslint-formatter-sarif \
             --output-file=reports/eslint-results.sarif || true
 
-
       - name: Debug ESLint Output
-        run: cat reports/eslint-results.sarif || echo "No SARIF report generated"
+        run: cat reports/eslint-results.sarif || echo "⚠️ No SARIF report generated"
 
       - name: Upload SARIF report
         uses: github/codeql-action/upload-sarif@v3
