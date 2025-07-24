@@ -25,7 +25,7 @@ export default defineConfig([
   // React-specific config
   pluginReact.configs.flat.recommended,
 
-  // Mocha test globals for test.js
+  // Mocha test file support
   {
     files: ["tests/**/*.js"],
     languageOptions: {
