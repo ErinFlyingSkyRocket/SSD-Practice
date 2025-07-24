@@ -13,7 +13,7 @@ describe('Timestamp Function', () => {
     const now = new Date().toISOString();
     expect(new Date(timestamp).getTime()).to.be.closeTo(new Date(now).getTime(), 1000);
   });
-
+//
   // Close the server after all tests
   after(() => {
     server.close();
