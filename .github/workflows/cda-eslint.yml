@@ -5,16 +5,14 @@ on: [push, pull_request]
 jobs:
   eslint:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Cache Node.js modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-modules
+      # OPTIONAL: disable cache temporarily (to avoid broken eslint permissions)
+      # - name: Clear node_modules (for debugging)
+      #   run: rm -rf node_modules
 
       - name: Install Node.js dependencies
         run: npm install
@@ -27,10 +25,13 @@ jobs:
 
       - name: Run ESLint with SARIF output
         run: |
-          npx eslint . \
+          npx --no-install eslint . \
             --ext .js,.mjs,.cjs,.jsx \
             --format=@microsoft/eslint-formatter-sarif \
             --output-file=reports/eslint-results.sarif || true
+
+      - name: List contents of reports folder
+        run: ls -lah reports || echo "⚠️ No reports folder found"
 
       - name: Debug ESLint Output
         run: cat reports/eslint-results.sarif || echo "⚠️ No SARIF report generated"
